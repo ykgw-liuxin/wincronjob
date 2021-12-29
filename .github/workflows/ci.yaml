@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: build the docker image
+        run: |
+          docker build --file ./wincronjob/Dockerfile -t push meteor1113/wincronjob:latest .
+      - name: push the docker image
+        run: |
+          docker push meteor1113/wincronjob:latest
