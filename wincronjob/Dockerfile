@@ -3,10 +3,10 @@
 #Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
 #For more information, please see https://aka.ms/containercompat
 
-FROM ydxregistry.azurecr.io/ydx/ydx-dotnet-core-runtime:3.1-buster AS base
+FROM mcr.microsoft.com/dotnet/runtime:3.1 AS base
 WORKDIR /app
 
-FROM ydxregistry.azurecr.io/ydx/ydx-dotnet-core-runtime:3.1-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["wincronjob/wincronjob.csproj", "wincronjob/"]
 RUN dotnet restore "wincronjob/wincronjob.csproj"
