@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dxp-win-service
+  namespace: ydx-windows
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dxp-win-service
+  template:
+    metadata:
+      labels:
+        app:dxp-win-service
+    spec:
+      tolerations:
+      - key: "node"
+        operator: "Equal"
+        value: "windows"
+        effect: "NoSchedule"
+      nodeSelector:
+        "kubernetes.io/os": windows
+      containers:
+        - name: dxp-win-service
+          image: meteor1113/wincronjob:latest
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: "0.5"
+            requests:
+              memory: 100Mi
+              cpu: "0.1"

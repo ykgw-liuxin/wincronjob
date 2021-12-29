@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using Microsoft.VisualBasic;
 
 
@@ -12,6 +13,7 @@ namespace wincronjob
     {
         static void Main(string[] args)
         {
+            Thread.Sleep(5000);
             try
             {
                 var token = Environment.GetEnvironmentVariable("TOKEN");
@@ -25,6 +27,7 @@ namespace wincronjob
             {
                 Console.WriteLine("Error: " + ex);
             }
+            Thread.Sleep(5000);
         }
     }
 }
