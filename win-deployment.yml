@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app:dxp-win-service
+        app: dxp-win-service
     spec:
       tolerations:
       - key: "node"
