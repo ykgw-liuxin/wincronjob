@@ -1,0 +1,23 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
+#For more information, please see https://aka.ms/containercompat
+
+FROM ydxregistry.azurecr.io/ydx/ydx-dotnet-core-runtime:3.1-buster AS base
+WORKDIR /app
+
+FROM ydxregistry.azurecr.io/ydx/ydx-dotnet-core-runtime:3.1-buster-slim AS build
+WORKDIR /src
+COPY ["wincronjob/wincronjob.csproj", "wincronjob/"]
+RUN dotnet restore "wincronjob/wincronjob.csproj"
+COPY . .
+WORKDIR "/src/wincronjob"
+RUN dotnet build "wincronjob.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "wincronjob.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "wincronjob.dll"]
