@@ -13,11 +13,11 @@ namespace wincronjob
     {
         static void Main(string[] args)
         {
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    Console.WriteLine("1");
-            //    Thread.Sleep(1000);
-            //}
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine("1");
+                Thread.Sleep(1000);
+            }
 
             try
             {
