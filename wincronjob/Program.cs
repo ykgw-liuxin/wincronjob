@@ -13,7 +13,7 @@ namespace wincronjob
     {
         static void Main(string[] args)
         {
-            //Print("1");
+            Print("1");
             try
             {
                 var token = Environment.GetEnvironmentVariable("TOKEN");
@@ -32,7 +32,7 @@ namespace wincronjob
 
         static void Print(string msg)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine(msg);
                 Thread.Sleep(1000);
